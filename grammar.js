@@ -1,7 +1,7 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-module.exports = grammar({
+export default grammar({
   name: "runt",
 
   extras: ($) => [/\s/, $.line_comment, $.block_comment],
@@ -248,6 +248,12 @@ module.exports = grammar({
         "[",
         $.identifier,
         optional(seq("(", commaSep($._expression), ")")),
+        repeat(
+          seq(
+            optional($.identifier),
+            optional(seq("(", commaSep($._expression), ")")),
+          ),
+        ),
         "]",
       ),
 
