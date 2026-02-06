@@ -26,6 +26,7 @@ export default grammar({
         $.struct_def,
         $.enum_def,
         $.latent_def,
+        $.macro_def,
         $.const_def,
         $.static_def,
         $.category_def,
@@ -140,6 +141,26 @@ export default grammar({
 
     byte_offset: ($) =>
       seq($.integer_literal, optional(seq(":", $.integer_literal))),
+
+    //*****************************************************************************
+    // MACRO
+    //*****************************************************************************
+
+    macro_def: ($) =>
+      seq(
+        optional($.visibility),
+        "macro",
+        field("name", $.identifier),
+        $.latent_field_list,
+        optional(";"),
+      ),
+
+    macro_field_list: ($) => seq("{", optional(commaSep($.macro_block)), "}"),
+
+    macro_block: ($) =>
+      repeat(
+        choice($._item, $.integer_literal, $.float_literal, $.string_literal),
+      ),
 
     //*****************************************************************************
     // CONST / STATIC / VAR

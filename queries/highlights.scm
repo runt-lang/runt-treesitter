@@ -1,9 +1,10 @@
-;; Keywords
+; Keywords
 [
   "fn"
   "struct"
   "enum"
   "latent"
+  "macro"
   "const"
   "var"
   "static"
@@ -39,7 +40,7 @@
   "as"
 ] @keyword.modifier
 
-;; Operators
+; Operators
 [
   "+"
   "-"
@@ -69,11 +70,9 @@
   "..="
 ] @operator
 
-[
-  "=>"
-] @punctuation.special
+"=>" @punctuation.special
 
-;; Delimiters
+; Delimiters
 [
   "("
   ")"
@@ -92,7 +91,7 @@
   "->"
 ] @punctuation.delimiter
 
-;; Types
+; Types
 (primitive_type) @type.builtin
 
 (struct_def
@@ -113,7 +112,7 @@
 (generic_param
   (identifier) @type.parameter)
 
-;; Functions
+; Functions
 (function_def
   name: (identifier) @function)
 
@@ -124,14 +123,14 @@
   function: (member_expression
     member: (identifier) @function.method.call))
 
-;; Parameters
+; Parameters
 (parameter
   name: (identifier) @variable.parameter)
 
 (self_param
   "self" @variable.builtin)
 
-;; Fields
+; Fields
 (field
   name: (identifier) @property)
 
@@ -144,7 +143,7 @@
 (member_expression
   member: (identifier) @property)
 
-;; Variables
+; Variables
 (var_statement
   name: (identifier) @variable)
 
@@ -154,17 +153,17 @@
 (static_def
   name: (identifier) @variable.builtin)
 
-;; Patterns
+; Patterns
 (pattern_identifier) @variable
 
 (constructor_pattern
   (identifier) @type)
 
-;; Enum variants
+; Enum variants
 (variant
   name: (identifier) @type.enum.variant)
 
-;; Literals
+; Literals
 (integer_literal) @number
 
 (float_literal) @number.float
@@ -177,25 +176,25 @@
 
 (bool_literal) @boolean
 
-;; Comments
+; Comments
 (line_comment) @comment
 
 (block_comment) @comment
 
-;; Attributes
+; Attributes
 (attribute
   (identifier) @attribute)
 
 "#" @attribute
 
-;; Special identifiers
+; Special identifiers
 ((identifier) @variable.builtin
   (#match? @variable.builtin "^(self|Self)$"))
 
 ((identifier) @type
   (#match? @type "^[A-Z]"))
 
-;; Paths
+; Paths
 (path_expression
   (identifier) @module)
 

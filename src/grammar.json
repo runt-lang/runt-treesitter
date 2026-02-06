@@ -30,6 +30,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "macro_def"
+        },
+        {
+          "type": "SYMBOL",
           "name": "const_def"
         },
         {
@@ -3731,14 +3735,8 @@
     }
   ],
   "conflicts": [
-    [
-      "match_statement",
-      "match_expression"
-    ],
-    [
-      "if_statement",
-      "if_expression"
-    ]
+    ["match_statement", "match_expression"],
+    ["if_statement", "if_expression"]
   ],
   "precedences": [],
   "externals": [],
