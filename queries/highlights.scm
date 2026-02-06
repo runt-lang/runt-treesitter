@@ -159,6 +159,10 @@
 (constructor_pattern
   (identifier) @type)
 
+; Macros
+(macro_def
+  name: (identifier) @constant)
+
 ; Enum variants
 (variant
   name: (identifier) @type.enum.variant)

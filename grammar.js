@@ -1,7 +1,7 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-export default grammar({
+module.exports = grammar({
   name: "runt",
 
   extras: ($) => [/\s/, $.line_comment, $.block_comment],
@@ -147,11 +147,75 @@ export default grammar({
     //*****************************************************************************
 
     macro_def: ($) =>
-      seq(optional($.visibility), "macro", $.macro_field_list, optional(";")),
+      seq(
+        optional($.visibility),
+        "macro",
+        field("name", $.identifier),
+        "{",
+        optional($.macro_body),
+        "}",
+        optional(";"),
+      ),
 
-    macro_field_list: ($) => seq("{", optional($.macro_block), "}"),
+    macro_body: ($) => repeat1($._macro_token),
 
-    macro_block: ($) => repeat(seq("")),
+    _macro_token: ($) =>
+      choice(
+        seq("{", optional($.macro_body), "}"),
+        $.identifier,
+        $.integer_literal,
+        $.float_literal,
+        $.string_literal,
+        $.char_literal,
+        $.bool_literal,
+        $.primitive_type,
+        $._macro_punct,
+      ),
+
+    _macro_punct: ($) =>
+      choice(
+        "(",
+        ")",
+        "[",
+        "]",
+        ",",
+        ".",
+        ":",
+        ";",
+        "::",
+        "->",
+        "=>",
+        "..",
+        "..=",
+        "#",
+        "@",
+        "?",
+        "+",
+        "-",
+        "*",
+        "/",
+        "%",
+        "&",
+        "|",
+        "^",
+        "~",
+        "<<",
+        ">>",
+        "==",
+        "!=",
+        "<",
+        ">",
+        "<=",
+        ">=",
+        "&&",
+        "||",
+        "!",
+        "=",
+        "+=",
+        "-=",
+        "*=",
+        "/=",
+      ),
 
     //*****************************************************************************
     // CONST / STATIC / VAR
@@ -258,13 +322,8 @@ export default grammar({
       seq(
         "#",
         "[",
-        $.identifier,
-        optional(seq("(", commaSep($._expression), ")")),
-        repeat(
-          seq(
-            optional($.identifier),
-            optional(seq("(", commaSep($._expression), ")")),
-          ),
+        commaSep1(
+          seq($.identifier, optional(seq("(", commaSep($._expression), ")"))),
         ),
         "]",
       ),
