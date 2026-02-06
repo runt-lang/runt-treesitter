@@ -147,20 +147,11 @@ export default grammar({
     //*****************************************************************************
 
     macro_def: ($) =>
-      seq(
-        optional($.visibility),
-        "macro",
-        field("name", $.identifier),
-        $.latent_field_list,
-        optional(";"),
-      ),
+      seq(optional($.visibility), "macro", $.macro_field_list, optional(";")),
 
-    macro_field_list: ($) => seq("{", optional(commaSep($.macro_block)), "}"),
+    macro_field_list: ($) => seq("{", optional($.macro_block), "}"),
 
-    macro_block: ($) =>
-      repeat(
-        choice($._item, $.integer_literal, $.float_literal, $.string_literal),
-      ),
+    macro_block: ($) => repeat(seq("")),
 
     //*****************************************************************************
     // CONST / STATIC / VAR
