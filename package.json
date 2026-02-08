@@ -27,7 +27,7 @@
   },
   "tree-sitter": [
     {
-      "scope": "source.runt",
+      "scope": "source.rn",
       "injection-regex": "^runt$",
       "file-types": [
         "runt"
