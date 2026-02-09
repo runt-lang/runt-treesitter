@@ -94,11 +94,16 @@
 ; Types
 (primitive_type) @type.builtin
 
+(type_identifier) @type
+
 (struct_def
   name: (identifier) @type)
 
 (enum_def
   name: (identifier) @type)
+
+(enum_def
+  discriminant: (_) @type)
 
 (codec_def
   name: (identifier) @type)
@@ -111,6 +116,9 @@
 
 (generic_param
   (identifier) @type.parameter)
+
+(type_alias
+  name: (identifier) @type)
 
 ; Functions
 (function_def
@@ -192,15 +200,24 @@
 "#" @attribute
 
 ; Special identifiers
-((identifier) @variable.builtin
-  (#match? @variable.builtin "^(self|Self)$"))
+"self" @variable.builtin
+
+(self_param
+  "self" @variable.builtin)
+
+((identifier) @type
+  (#match? @type "^Self$"))
 
 ((identifier) @type
   (#match? @type "^[A-Z]"))
 
-; Paths
+; Paths — last segment is the value/type, preceding are namespaces
 (path_expression
-  (identifier) @module)
+  (identifier) @module
+  (identifier))
+
+(path_expression
+  (identifier) @type .)
 
 (import_path
   (identifier) @module)

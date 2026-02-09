@@ -103,6 +103,7 @@ module.exports = grammar({
         "enum",
         field("name", $.identifier),
         optional($.generic_params),
+        optional(seq(":", field("discriminant", $._type))),
         $.variant_list,
         optional(";"),
       ),
@@ -275,7 +276,21 @@ module.exports = grammar({
       seq("extend", field("type", $._extend_type), $.impl_block),
 
     impl_block: ($) =>
-      seq("{", repeat(choice($.function_def, $.attribute)), "}"),
+      seq(
+        "{",
+        repeat(choice($.function_def, $.const_def, $.type_alias, $.attribute)),
+        "}",
+      ),
+
+    type_alias: ($) =>
+      seq(
+        optional($.visibility),
+        "type",
+        field("name", $.identifier),
+        "=",
+        field("type", $._type),
+        ";",
+      ),
 
     // Separate type rule for extend to avoid conflicts
     _extend_type: ($) =>
