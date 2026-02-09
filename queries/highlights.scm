@@ -3,7 +3,7 @@
   "fn"
   "struct"
   "enum"
-  "latent"
+  "codec"
   "macro"
   "const"
   "var"
@@ -100,7 +100,7 @@
 (enum_def
   name: (identifier) @type)
 
-(latent_def
+(codec_def
   name: (identifier) @type)
 
 (category_def
@@ -134,7 +134,7 @@
 (field
   name: (identifier) @property)
 
-(latent_field
+(codec_field
   name: (identifier) @property)
 
 (field_init

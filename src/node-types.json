@@ -2095,7 +2095,7 @@
     }
   },
   {
-    "type": "latent_def",
+    "type": "codec_def",
     "named": true,
     "fields": {
       "name": {
@@ -2114,7 +2114,7 @@
       "required": true,
       "types": [
         {
-          "type": "latent_field_list",
+          "type": "codec_field_list",
           "named": true
         },
         {
@@ -2125,7 +2125,7 @@
     }
   },
   {
-    "type": "latent_field",
+    "type": "codec_field",
     "named": true,
     "fields": {
       "name": {
@@ -2177,7 +2177,7 @@
     }
   },
   {
-    "type": "latent_field_list",
+    "type": "codec_field_list",
     "named": true,
     "fields": {},
     "children": {
@@ -2185,7 +2185,7 @@
       "required": false,
       "types": [
         {
-          "type": "latent_field",
+          "type": "codec_field",
           "named": true
         }
       ]
@@ -3097,7 +3097,7 @@
           "named": true
         },
         {
-          "type": "latent_def",
+          "type": "codec_def",
           "named": true
         },
         {
@@ -4072,7 +4072,7 @@
     "named": false
   },
   {
-    "type": "latent",
+    "type": "codec",
     "named": false
   },
   {

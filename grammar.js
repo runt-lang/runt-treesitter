@@ -25,7 +25,7 @@ module.exports = grammar({
         $.function_def,
         $.struct_def,
         $.enum_def,
-        $.latent_def,
+        $.codec_def,
         $.macro_def,
         $.const_def,
         $.static_def,
@@ -117,18 +117,18 @@ module.exports = grammar({
     // LATENT
     //*****************************************************************************
 
-    latent_def: ($) =>
+    codec_def: ($) =>
       seq(
         optional($.visibility),
-        "latent",
+        "codec",
         field("name", $.identifier),
-        $.latent_field_list,
+        $.codec_field_list,
         optional(";"),
       ),
 
-    latent_field_list: ($) => seq("[", optional(commaSep($.latent_field)), "]"),
+    codec_field_list: ($) => seq("[", optional(commaSep($.codec_field)), "]"),
 
-    latent_field: ($) =>
+    codec_field: ($) =>
       seq(
         field("name", $.identifier),
         ":",

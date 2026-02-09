@@ -1,6 +1,6 @@
+target/**
 node_modules/
 build/
-target/
 *.wasm
 *.log
 *.so
