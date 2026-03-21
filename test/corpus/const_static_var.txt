@@ -1,0 +1,69 @@
+==========
+Const definition
+==========
+
+const PI: f64 = 3.14159;
+
+---
+
+(source_file
+  (const_def
+    name: (identifier)
+    type: (primitive_type)
+    value: (float_literal)))
+
+==========
+Const without value
+==========
+
+const MAX: i32;
+
+---
+
+(source_file
+  (const_def
+    name: (identifier)
+    type: (primitive_type)))
+
+==========
+Public const
+==========
+
+pub const VERSION: u32 = 1;
+
+---
+
+(source_file
+  (const_def
+    (visibility)
+    name: (identifier)
+    type: (primitive_type)
+    value: (integer_literal)))
+
+==========
+Static definition
+==========
+
+static counter: i32 = 0;
+
+---
+
+(source_file
+  (static_def
+    name: (identifier)
+    type: (primitive_type)
+    value: (integer_literal)))
+
+==========
+Static var definition
+==========
+
+static var mutable_state: bool = false;
+
+---
+
+(source_file
+  (static_def
+    name: (identifier)
+    type: (primitive_type)
+    value: (bool_literal)))

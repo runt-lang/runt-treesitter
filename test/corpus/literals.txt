@@ -1,0 +1,179 @@
+==========
+Integer literals
+==========
+
+fn test[] {
+    42;
+    1_000_000;
+    0xFF;
+    0xff_ab;
+    0b1010;
+    0b1111_0000;
+    0o777;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement (integer_literal))
+      (expression_statement (integer_literal))
+      (expression_statement (integer_literal))
+      (expression_statement (integer_literal))
+      (expression_statement (integer_literal))
+      (expression_statement (integer_literal))
+      (expression_statement (integer_literal)))))
+
+==========
+Integer literals with type suffix
+==========
+
+fn test[] {
+    42u32;
+    0xFFi64;
+    100usize;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement (integer_literal))
+      (expression_statement (integer_literal))
+      (expression_statement (integer_literal)))))
+
+==========
+Float literals
+==========
+
+fn test[] {
+    3.14;
+    1.0;
+    1e10;
+    2.5e-3;
+    1.0f32;
+    3.14f64;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement (float_literal))
+      (expression_statement (float_literal))
+      (expression_statement (float_literal))
+      (expression_statement (float_literal))
+      (expression_statement (float_literal))
+      (expression_statement (float_literal)))))
+
+==========
+String literal
+==========
+
+fn test[] {
+    "hello world";
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement (string_literal)))))
+
+==========
+String with escape sequences
+==========
+
+fn test[] {
+    "hello\nworld\t\"end\"";
+    "\x41\u{1F600}";
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (string_literal
+          (escape_sequence)
+          (escape_sequence)
+          (escape_sequence)
+          (escape_sequence)))
+      (expression_statement
+        (string_literal
+          (escape_sequence)
+          (escape_sequence))))))
+
+==========
+Char literal
+==========
+
+fn test[] {
+    'a';
+    '\n';
+    '\x41';
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement (char_literal))
+      (expression_statement (char_literal (escape_sequence)))
+      (expression_statement (char_literal (escape_sequence))))))
+
+==========
+Bool literals
+==========
+
+fn test[] {
+    true;
+    false;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement (bool_literal))
+      (expression_statement (bool_literal)))))
+
+==========
+Null and undefined
+==========
+
+fn test[] {
+    null;
+    undefined;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement (null_literal))
+      (expression_statement (undefined_literal)))))

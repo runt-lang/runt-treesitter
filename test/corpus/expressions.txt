@@ -1,0 +1,534 @@
+==========
+Call expression
+==========
+
+fn test[] {
+    foo(1, 2);
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (call_expression
+          function: (identifier)
+          (integer_literal)
+          (integer_literal))))))
+
+==========
+Method call via member
+==========
+
+fn test[] {
+    obj.method(x);
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (call_expression
+          function: (member_expression
+            object: (identifier)
+            member: (identifier))
+          (identifier))))))
+
+==========
+Index expression
+==========
+
+fn test[] {
+    arr[0];
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (index_expression
+          array: (identifier)
+          index: (integer_literal))))))
+
+==========
+Member expression
+==========
+
+fn test[] {
+    point.x;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (member_expression
+          object: (identifier)
+          member: (identifier))))))
+
+==========
+Unary not
+==========
+
+fn test[] {
+    !a;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (unary_expression
+          operand: (identifier))))))
+
+==========
+Unary negate
+==========
+
+fn test[] {
+    -b;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (unary_expression
+          operand: (identifier))))))
+
+==========
+Unary deref and address
+==========
+
+fn test[] {
+    *c;
+    &d;
+    ~e;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (unary_expression
+          operand: (identifier)))
+      (expression_statement
+        (unary_expression
+          operand: (identifier)))
+      (expression_statement
+        (unary_expression
+          operand: (identifier))))))
+
+==========
+Binary arithmetic
+==========
+
+fn test[] {
+    a + b;
+    a - b;
+    a * b;
+    a / b;
+    a % b;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier))))))
+
+==========
+Comparison operators
+==========
+
+fn test[] {
+    a == b;
+    a != b;
+    a < b;
+    a > b;
+    a <= b;
+    a >= b;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier))))))
+
+==========
+Logical operators
+==========
+
+fn test[] {
+    a && b;
+    a || b;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier))))))
+
+==========
+Bitwise operators
+==========
+
+fn test[] {
+    a & b;
+    a | b;
+    a ^ b;
+    a << b;
+    a >> b;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier))))))
+
+==========
+Concatenation operator
+==========
+
+fn test[] {
+    a ++ b;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (binary_expression (identifier) (identifier))))))
+
+==========
+Assignment operators
+==========
+
+fn test[] {
+    a = b;
+    a += b;
+    a -= b;
+    a *= b;
+    a /= b;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier)))
+      (expression_statement
+        (binary_expression (identifier) (identifier))))))
+
+==========
+Cast expression
+==========
+
+fn test[] {
+    x as f32;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (cast_expression
+          (identifier)
+          (primitive_type))))))
+
+==========
+Struct literal
+==========
+
+fn test[] {
+    Point { x = 1.0, y = 2.0 };
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (struct_literal
+          type: (identifier)
+          (field_init
+            (identifier)
+            (float_literal))
+          (field_init
+            (identifier)
+            (float_literal)))))))
+
+==========
+Array literal
+==========
+
+fn test[] {
+    [1, 2, 3];
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (array_literal
+          (integer_literal)
+          (integer_literal)
+          (integer_literal))))))
+
+==========
+Array fill literal
+==========
+
+fn test[] {
+    [0; 10];
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (array_literal
+          (integer_literal)
+          (integer_literal))))))
+
+==========
+Range expression
+==========
+
+fn test[] {
+    0..10;
+    0..=10;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (range_expression
+          (integer_literal)
+          (integer_literal)))
+      (expression_statement
+        (range_expression
+          (integer_literal)
+          (integer_literal))))))
+
+==========
+If expression assigned
+==========
+
+fn test[] {
+    var x: i32 = if true { 1; } else { 2; };
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (var_statement
+        name: (identifier)
+        type: (primitive_type)
+        value: (if_expression
+          condition: (bool_literal)
+          consequence: (block
+            (expression_statement
+              (integer_literal)))
+          alternative: (block
+            (expression_statement
+              (integer_literal))))))))
+
+==========
+Grouped expression
+==========
+
+fn test[] {
+    (a + b) * c;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (binary_expression
+          (grouped_expression
+            (binary_expression
+              (identifier)
+              (identifier)))
+          (identifier))))))
+
+==========
+Path expression
+==========
+
+fn test[] {
+    std::io::println;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (path_expression
+          (identifier)
+          (identifier)
+          (identifier))))))
+
+==========
+Comptime expression
+==========
+
+fn test[] {
+    comptime 42;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (comptime_expression
+          (integer_literal))))))
+
+==========
+Chained member and call
+==========
+
+fn test[] {
+    a.b.c(d);
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (call_expression
+          function: (member_expression
+            object: (member_expression
+              object: (identifier)
+              member: (identifier))
+            member: (identifier))
+          (identifier))))))

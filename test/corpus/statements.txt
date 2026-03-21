@@ -1,0 +1,446 @@
+==========
+Variable declaration
+==========
+
+fn test[] {
+    var x: i32 = 5;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (var_statement
+        name: (identifier)
+        type: (primitive_type)
+        value: (integer_literal)))))
+
+==========
+Mutable variable
+==========
+
+fn test[] {
+    var mut x: i32 = 0;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (var_statement
+        name: (identifier)
+        type: (primitive_type)
+        value: (integer_literal)))))
+
+==========
+Variable with inferred type
+==========
+
+fn test[] {
+    var x = 42;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (var_statement
+        name: (identifier)
+        value: (integer_literal)))))
+
+==========
+Return statement
+==========
+
+fn test[] -> i32 {
+    return 42;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    return_type: (primitive_type)
+    (block
+      (return_statement
+        (integer_literal)))))
+
+==========
+Empty return
+==========
+
+fn test[] {
+    return;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (return_statement))))
+
+==========
+Break and continue
+==========
+
+fn test[] {
+    break;
+    continue;
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (break_statement)
+      (continue_statement))))
+
+==========
+If statement
+==========
+
+fn test[] {
+    if true {
+    }
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (if_statement
+        condition: (bool_literal)
+        consequence: (block)))))
+
+==========
+If-else statement
+==========
+
+fn test[] {
+    if true {
+    } else {
+    }
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (if_statement
+        condition: (bool_literal)
+        consequence: (block)
+        alternative: (block)))))
+
+==========
+If-else-if chain
+==========
+
+fn test[] {
+    if true {
+    } else if false {
+    } else {
+    }
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (if_statement
+        condition: (bool_literal)
+        consequence: (block)
+        alternative: (if_statement
+          condition: (bool_literal)
+          consequence: (block)
+          alternative: (block))))))
+
+==========
+While loop
+==========
+
+fn test[] {
+    while true {
+    }
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (while_statement
+        condition: (bool_literal)
+        body: (block)))))
+
+==========
+For loop
+==========
+
+fn test[] {
+    for i in 0..10 {
+    }
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (for_statement
+        variable: (identifier)
+        iterator: (range_expression
+          (integer_literal)
+          (integer_literal))
+        body: (block)))))
+
+==========
+Loop statement
+==========
+
+fn test[] {
+    loop {
+    }
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (loop_statement
+        (block)))))
+
+==========
+Match statement
+==========
+
+fn test[] {
+    match x [
+        1 => a,
+        2 => b,
+        _ => c,
+    ]
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (match_statement
+        value: (identifier)
+        (match_arm
+          (pattern
+            (integer_literal))
+          (identifier))
+        (match_arm
+          (pattern
+            (integer_literal))
+          (identifier))
+        (match_arm
+          (pattern)
+          (identifier))))))
+
+==========
+Match with guard
+==========
+
+fn test[] {
+    match x [
+        n if n > 0 => n,
+        _ => 0,
+    ]
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (match_statement
+        value: (identifier)
+        (match_arm
+          (pattern
+            (constructor_pattern
+              (identifier)))
+          guard: (binary_expression
+            (identifier)
+            (integer_literal))
+          (identifier))
+        (match_arm
+          (pattern)
+          (integer_literal))))))
+
+==========
+Match with block arm
+==========
+
+fn test[] {
+    match x [
+        1 => {
+            y;
+        },
+    ]
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (match_statement
+        value: (identifier)
+        (match_arm
+          (pattern
+            (integer_literal))
+          (block
+            (expression_statement
+              (identifier))))))))
+
+==========
+Match with constructor pattern
+==========
+
+fn test[] {
+    match opt [
+        Some(x) => x,
+        None => 0,
+    ]
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (match_statement
+        value: (identifier)
+        (match_arm
+          (pattern
+            (constructor_pattern
+              (identifier)
+              (pattern
+                (constructor_pattern
+                  (identifier)))))
+          (identifier))
+        (match_arm
+          (pattern
+            (constructor_pattern
+              (identifier)))
+          (integer_literal))))))
+
+==========
+Match with range pattern
+==========
+
+fn test[] {
+    match x [
+        0..10 => true,
+        _ => false,
+    ]
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (match_statement
+        value: (identifier)
+        (match_arm
+          (pattern
+            (range_pattern
+              (integer_literal)
+              (integer_literal)))
+          (bool_literal))
+        (match_arm
+          (pattern)
+          (bool_literal))))))
+
+==========
+Match with path pattern
+==========
+
+fn test[] {
+    match msg [
+        Color::Red => 0,
+    ]
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (match_statement
+        value: (identifier)
+        (match_arm
+          (pattern
+            (constructor_pattern
+              (identifier)
+              (identifier)))
+          (integer_literal))))))
+
+==========
+Expression statement
+==========
+
+fn test[] {
+    foo(1);
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block
+      (expression_statement
+        (call_expression
+          function: (identifier)
+          (integer_literal))))))

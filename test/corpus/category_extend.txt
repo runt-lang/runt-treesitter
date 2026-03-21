@@ -1,0 +1,175 @@
+==========
+Simple category
+==========
+
+category Drawable [
+    fn draw[self];,
+]
+
+---
+
+(source_file
+  (category_def
+    name: (identifier)
+    (function_def
+      name: (identifier)
+      (param_list
+        (self_param)))))
+
+==========
+Category with bounds
+==========
+
+category Renderable : Drawable + Visible [
+    fn draw[self];,
+]
+
+---
+
+(source_file
+  (category_def
+    name: (identifier)
+    (category_bounds
+      (type_identifier)
+      (type_identifier))
+    (function_def
+      name: (identifier)
+      (param_list
+        (self_param)))))
+
+==========
+Generic category
+==========
+
+category Container<T> [
+    fn get[self] -> T;,
+]
+
+---
+
+(source_file
+  (category_def
+    name: (identifier)
+    (generic_params
+      (generic_param
+        (identifier)))
+    (function_def
+      name: (identifier)
+      (param_list
+        (self_param))
+      return_type: (type_identifier))))
+
+==========
+Simple extend
+==========
+
+extend Point {
+    fn length[self] -> f32 {
+    }
+}
+
+---
+
+(source_file
+  (extend_def
+    type: (extend_target
+      (identifier))
+    (impl_block
+      (function_def
+        name: (identifier)
+        (param_list
+          (self_param))
+        return_type: (primitive_type)
+        (block)))))
+
+==========
+Extend with category bound
+==========
+
+extend Point : Drawable {
+    fn draw[self] {
+    }
+}
+
+---
+
+(source_file
+  (extend_def
+    type: (extend_target
+      (identifier))
+    (category_bounds
+      (type_identifier))
+    (impl_block
+      (function_def
+        name: (identifier)
+        (param_list
+          (self_param))
+        (block)))))
+
+==========
+Extend with type alias
+==========
+
+extend MyType {
+    type Inner = i32;
+}
+
+---
+
+(source_file
+  (extend_def
+    type: (extend_target
+      (identifier))
+    (impl_block
+      (type_alias
+        name: (identifier)
+        type: (primitive_type)))))
+
+==========
+Extend primitive type
+==========
+
+extend f32 {
+    fn abs[self] -> f32 {
+    }
+}
+
+---
+
+(source_file
+  (extend_def
+    type: (extend_target
+      (primitive_type))
+    (impl_block
+      (function_def
+        name: (identifier)
+        (param_list
+          (self_param))
+        return_type: (primitive_type)
+        (block)))))
+
+==========
+Extend with generics
+==========
+
+extend Vec<T> {
+    fn len[self] -> usize {
+    }
+}
+
+---
+
+(source_file
+  (extend_def
+    type: (extend_target
+      (identifier)
+      (generic_params
+        (generic_param
+          (identifier))))
+    (impl_block
+      (function_def
+        name: (identifier)
+        (param_list
+          (self_param))
+        return_type: (primitive_type)
+        (block)))))

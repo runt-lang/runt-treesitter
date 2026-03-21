@@ -1,0 +1,90 @@
+==========
+Simple codec
+==========
+
+codec Header [
+    magic: [0..4] as u32,
+    version: [4..8] as u32,
+]
+
+---
+
+(source_file
+  (codec_def
+    name: (identifier)
+    (codec_field_list
+      (codec_field
+        name: (identifier)
+        (byte_range
+          (byte_offset
+            (integer_literal))
+          (byte_offset
+            (integer_literal)))
+        type: (primitive_type))
+      (codec_field
+        name: (identifier)
+        (byte_range
+          (byte_offset
+            (integer_literal))
+          (byte_offset
+            (integer_literal)))
+        type: (primitive_type)))))
+
+==========
+Codec with bit offsets
+==========
+
+codec Flags [
+    enabled: [0:0..0:1] as bool,
+]
+
+---
+
+(source_file
+  (codec_def
+    name: (identifier)
+    (codec_field_list
+      (codec_field
+        name: (identifier)
+        (byte_range
+          (byte_offset
+            (integer_literal)
+            (integer_literal))
+          (byte_offset
+            (integer_literal)
+            (integer_literal)))
+        type: (primitive_type)))))
+
+==========
+Codec with direction
+==========
+
+codec Stream [
+    in source: [0..4] as u32,
+    out dest: [4..8] as u32,
+]
+
+---
+
+(source_file
+  (codec_def
+    name: (identifier)
+    (codec_field_list
+      (codec_field
+        (direction)
+        name: (identifier)
+        (byte_range
+          (byte_offset
+            (integer_literal))
+          (byte_offset
+            (integer_literal)))
+        type: (primitive_type))
+      (codec_field
+        (direction)
+        name: (identifier)
+        (byte_range
+          (byte_offset
+            (integer_literal))
+          (byte_offset
+            (integer_literal)))
+        type: (primitive_type)))))

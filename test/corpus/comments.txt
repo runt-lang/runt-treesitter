@@ -1,0 +1,50 @@
+==========
+Line comment
+==========
+
+// a comment
+fn test[] {
+}
+
+---
+
+(source_file
+  (line_comment)
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block)))
+
+==========
+Doc comment
+==========
+
+/// documentation
+fn test[] {
+}
+
+---
+
+(source_file
+  (line_comment)
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block)))
+
+==========
+Block comment
+==========
+
+/* block comment */
+fn test[] {
+}
+
+---
+
+(source_file
+  (block_comment)
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block)))

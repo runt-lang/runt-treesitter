@@ -1,0 +1,120 @@
+==========
+Simple enum
+==========
+
+enum Color [
+    Red,
+    Green,
+    Blue,
+]
+
+---
+
+(source_file
+  (enum_def
+    name: (identifier)
+    (variant_list
+      (variant
+        name: (identifier))
+      (variant
+        name: (identifier))
+      (variant
+        name: (identifier)))))
+
+==========
+Enum with values
+==========
+
+enum Status [
+    Active = 1,
+    Inactive = 0,
+]
+
+---
+
+(source_file
+  (enum_def
+    name: (identifier)
+    (variant_list
+      (variant
+        name: (identifier)
+        value: (integer_literal))
+      (variant
+        name: (identifier)
+        value: (integer_literal)))))
+
+==========
+Enum with variant data
+==========
+
+enum Shape [
+    Circle [f32],
+    Rect [f32, f32],
+    None,
+]
+
+---
+
+(source_file
+  (enum_def
+    name: (identifier)
+    (variant_list
+      (variant
+        name: (identifier)
+        (variant_data
+          (primitive_type)))
+      (variant
+        name: (identifier)
+        (variant_data
+          (primitive_type)
+          (primitive_type)))
+      (variant
+        name: (identifier)))))
+
+==========
+Enum with discriminant type
+==========
+
+enum Flags : u8 [
+    A = 1,
+    B = 2,
+]
+
+---
+
+(source_file
+  (enum_def
+    name: (identifier)
+    discriminant: (primitive_type)
+    (variant_list
+      (variant
+        name: (identifier)
+        value: (integer_literal))
+      (variant
+        name: (identifier)
+        value: (integer_literal)))))
+
+==========
+Generic enum
+==========
+
+enum Option<T> [
+    Some [T],
+    None,
+]
+
+---
+
+(source_file
+  (enum_def
+    name: (identifier)
+    (generic_params
+      (generic_param
+        (identifier)))
+    (variant_list
+      (variant
+        name: (identifier)
+        (variant_data
+          (type_identifier)))
+      (variant
+        name: (identifier)))))

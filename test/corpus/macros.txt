@@ -1,0 +1,103 @@
+==========
+Simple macro
+==========
+
+macro debug {
+    x + y
+}
+
+---
+
+(source_file
+  (macro_def
+    name: (identifier)
+    (macro_body
+      (identifier)
+      (identifier))))
+
+==========
+Macro with nested braces
+==========
+
+macro block_macro {
+    fn test[] { 42 }
+}
+
+---
+
+(source_file
+  (macro_def
+    name: (identifier)
+    (macro_body
+      (identifier)
+      (identifier)
+      (macro_body
+        (integer_literal)))))
+
+==========
+Empty macro
+==========
+
+macro empty {}
+
+---
+
+(source_file
+  (macro_def
+    name: (identifier)))
+
+==========
+Macro with varied tokens
+==========
+
+macro complex {
+    a :: b -> c => d
+}
+
+---
+
+(source_file
+  (macro_def
+    name: (identifier)
+    (macro_body
+      (identifier)
+      (identifier)
+      (identifier)
+      (identifier))))
+
+==========
+Macro with literals
+==========
+
+macro with_lits {
+    "hello" 42 3.14 true null
+}
+
+---
+
+(source_file
+  (macro_def
+    name: (identifier)
+    (macro_body
+      (string_literal)
+      (integer_literal)
+      (float_literal)
+      (bool_literal)
+      (null_literal))))
+
+==========
+Public macro
+==========
+
+pub macro exported {
+    x
+}
+
+---
+
+(source_file
+  (macro_def
+    (visibility)
+    name: (identifier)
+    (macro_body
+      (identifier))))

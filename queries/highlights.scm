@@ -13,6 +13,7 @@
   "extern"
   "import"
   "mod"
+  "comptime"
 ] @keyword
 
 (visibility) @keyword
@@ -33,9 +34,6 @@
   "in"
   "out"
   "inout"
-] @keyword.modifier
-
-[
   "mut"
   "as"
 ] @keyword.modifier
@@ -47,9 +45,11 @@
   "*"
   "/"
   "%"
+  "++"
   "&"
   "|"
   "^"
+  "~"
   "!"
   "<<"
   ">>"
@@ -66,8 +66,15 @@
   "-="
   "*="
   "/="
+  "%="
+  "&="
+  "|="
+  "^="
+  "<<="
+  ">>="
   ".."
   "..="
+  "..."
 ] @operator
 
 "=>" @punctuation.special
@@ -120,6 +127,14 @@
 (type_alias
   name: (identifier) @type)
 
+; Category bounds
+(category_bounds
+  (type_identifier) @type)
+
+; Extend target
+(extend_target
+  (identifier) @type)
+
 ; Functions
 (function_def
   name: (identifier) @function)
@@ -159,7 +174,7 @@
   name: (identifier) @constant)
 
 (static_def
-  name: (identifier) @variable.builtin)
+  name: (identifier) @variable)
 
 ; Patterns
 (pattern_identifier) @variable
@@ -169,7 +184,7 @@
 
 ; Macros
 (macro_def
-  name: (identifier) @constant)
+  name: (identifier) @macro)
 
 ; Enum variants
 (variant
@@ -188,6 +203,10 @@
 
 (bool_literal) @boolean
 
+(null_literal) @constant.builtin
+
+(undefined_literal) @constant.builtin
+
 ; Comments
 (line_comment) @comment
 
@@ -201,9 +220,6 @@
 
 ; Special identifiers
 "self" @variable.builtin
-
-(self_param
-  "self" @variable.builtin)
 
 ((identifier) @type
   (#match? @type "^Self$"))
@@ -221,5 +237,3 @@
 
 (import_path
   (identifier) @module)
-
-"*" @character.special

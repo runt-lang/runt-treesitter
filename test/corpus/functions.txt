@@ -1,0 +1,181 @@
+==========
+Simple function
+==========
+
+fn main[] {
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block)))
+
+==========
+Function with return type
+==========
+
+fn add[a: i32, b: i32] -> i32 {
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list
+      (parameter
+        name: (identifier)
+        type: (primitive_type))
+      (parameter
+        name: (identifier)
+        type: (primitive_type)))
+    return_type: (primitive_type)
+    (block)))
+
+==========
+Function with self parameter
+==========
+
+fn update[mut self, x: f32] {
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list
+      (self_param)
+      (parameter
+        name: (identifier)
+        type: (primitive_type)))
+    (block)))
+
+==========
+Function with direction modifiers
+==========
+
+fn process[in a: f32, out b: f32, inout c: f32] {
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list
+      (parameter
+        (direction)
+        name: (identifier)
+        type: (primitive_type))
+      (parameter
+        (direction)
+        name: (identifier)
+        type: (primitive_type))
+      (parameter
+        (direction)
+        name: (identifier)
+        type: (primitive_type)))
+    (block)))
+
+==========
+Public function
+==========
+
+pub fn visible[] {
+}
+
+---
+
+(source_file
+  (function_def
+    (visibility)
+    name: (identifier)
+    (param_list)
+    (block)))
+
+==========
+Function with generic params
+==========
+
+fn convert<T, U>[val: T] -> U {
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (generic_params
+      (generic_param
+        (identifier))
+      (generic_param
+        (identifier)))
+    (param_list
+      (parameter
+        name: (identifier)
+        type: (type_identifier)))
+    return_type: (type_identifier)
+    (block)))
+
+==========
+Function with constrained generics
+==========
+
+fn bounded<T: Clone+Copy>[val: T] {
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (generic_params
+      (generic_param
+        (identifier)
+        (type_constraint
+          (identifier)
+          (identifier))))
+    (param_list
+      (parameter
+        name: (identifier)
+        type: (type_identifier)))
+    (block)))
+
+==========
+Function declaration (no body)
+==========
+
+fn declared[x: i32] -> bool;
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list
+      (parameter
+        name: (identifier)
+        type: (primitive_type)))
+    return_type: (primitive_type)))
+
+==========
+Function with mut parameter
+==========
+
+fn mutate[mut x: i32] {
+}
+
+---
+
+(source_file
+  (function_def
+    name: (identifier)
+    (param_list
+      (parameter
+        name: (identifier)
+        type: (primitive_type)))
+    (block)))

@@ -1,0 +1,58 @@
+==========
+Simple attribute
+==========
+
+#[derive]
+fn test[] {
+}
+
+---
+
+(source_file
+  (attribute
+    (identifier))
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block)))
+
+==========
+Multiple attributes
+==========
+
+#[inline, cold]
+fn rare[] {
+}
+
+---
+
+(source_file
+  (attribute
+    (identifier)
+    (identifier))
+  (function_def
+    name: (identifier)
+    (param_list)
+    (block)))
+
+==========
+Attribute with arguments
+==========
+
+#[repr(8)]
+struct Aligned [
+    x: i32,
+]
+
+---
+
+(source_file
+  (attribute
+    (identifier)
+    (integer_literal))
+  (struct_def
+    name: (identifier)
+    (field_list
+      (field
+        name: (identifier)
+        type: (primitive_type)))))

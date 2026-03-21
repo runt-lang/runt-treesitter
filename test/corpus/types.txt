@@ -1,0 +1,178 @@
+==========
+Integer primitive types
+==========
+
+const a: i8 = 0;
+const b: i16 = 0;
+const c: i32 = 0;
+const d: i64 = 0;
+const e: u8 = 0;
+const f: u16 = 0;
+const g: u32 = 0;
+const h: u64 = 0;
+const i: isize = 0;
+const j: usize = 0;
+
+---
+
+(source_file
+  (const_def name: (identifier) type: (primitive_type) value: (integer_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (integer_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (integer_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (integer_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (integer_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (integer_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (integer_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (integer_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (integer_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (integer_literal)))
+
+==========
+Float primitive types
+==========
+
+const a: f4 = 0;
+const b: f8 = 0;
+const c: f16 = 0;
+const d: f32 = 0;
+const e: f64 = 0;
+
+---
+
+(source_file
+  (const_def name: (identifier) type: (primitive_type) value: (integer_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (integer_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (integer_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (integer_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (integer_literal)))
+
+==========
+Other primitive types
+==========
+
+const a: bool = true;
+const b: char = 'x';
+const c: str = "hi";
+const d: ptr = null;
+const e: scope = null;
+
+---
+
+(source_file
+  (const_def name: (identifier) type: (primitive_type) value: (bool_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (char_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (string_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal)))
+
+==========
+Vector types
+==========
+
+const a: vec2 = null;
+const b: vec3 = null;
+const c: vec4 = null;
+const d: ivec2 = null;
+const e: uvec3 = null;
+const f: bvec4 = null;
+const g: vec8 = null;
+const h: quat = null;
+
+---
+
+(source_file
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal)))
+
+==========
+Matrix types
+==========
+
+const a: mat2 = null;
+const b: mat3 = null;
+const c: mat4 = null;
+const d: dmat2 = null;
+const e: dmat3 = null;
+const f: dmat4 = null;
+
+---
+
+(source_file
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal))
+  (const_def name: (identifier) type: (primitive_type) value: (null_literal)))
+
+==========
+Pointer type
+==========
+
+const a: *i32 = null;
+
+---
+
+(source_file
+  (const_def
+    name: (identifier)
+    type: (pointer_type
+      (primitive_type))
+    value: (null_literal)))
+
+==========
+Array type
+==========
+
+const a: [10]i32 = null;
+
+---
+
+(source_file
+  (const_def
+    name: (identifier)
+    type: (array_type
+      (integer_literal)
+      (primitive_type))
+    value: (null_literal)))
+
+==========
+Generic type
+==========
+
+const a: Vec<i32> = null;
+
+---
+
+(source_file
+  (const_def
+    name: (identifier)
+    type: (generic_type
+      name: (identifier)
+      (primitive_type))
+    value: (null_literal)))
+
+==========
+Nested generic type
+==========
+
+const a: Map<str, Vec<i32>> = null;
+
+---
+
+(source_file
+  (const_def
+    name: (identifier)
+    type: (generic_type
+      name: (identifier)
+      (primitive_type)
+      (generic_type
+        name: (identifier)
+        (primitive_type)))
+    value: (null_literal)))

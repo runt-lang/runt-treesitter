@@ -1,0 +1,100 @@
+==========
+Extern function
+==========
+
+extern fn puts[s: *u8] -> i32;
+
+---
+
+(source_file
+  (extern_def
+    name: (identifier)
+    (param_list
+      (parameter
+        name: (identifier)
+        type: (pointer_type
+          (primitive_type))))
+    return_type: (primitive_type)))
+
+==========
+Simple import
+==========
+
+import std::io;
+
+---
+
+(source_file
+  (import_decl
+    (import_path
+      (identifier)
+      (identifier))))
+
+==========
+Glob import
+==========
+
+import std::prelude::*;
+
+---
+
+(source_file
+  (import_decl
+    (import_path
+      (identifier)
+      (identifier))))
+
+==========
+Grouped import
+==========
+
+import std::io::(Read, Write);
+
+---
+
+(source_file
+  (import_decl
+    (import_path
+      (identifier)
+      (identifier)
+      (identifier)
+      (identifier))))
+
+==========
+Module declaration
+==========
+
+mod utils;
+
+---
+
+(source_file
+  (mod_decl
+    name: (identifier)))
+
+==========
+Module with body
+==========
+
+mod inner {
+}
+
+---
+
+(source_file
+  (mod_decl
+    name: (identifier)
+    (block)))
+
+==========
+Public module
+==========
+
+pub mod api;
+
+---
+
+(source_file
+  (mod_decl
+    (visibility)
+    name: (identifier)))
